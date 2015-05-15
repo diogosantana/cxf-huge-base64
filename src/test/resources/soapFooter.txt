@@ -1,0 +1,4 @@
+			</xml>
+		</ns2:SendHugeFileRequest>
+	</soap:Body>
+</soap:Envelope>
