@@ -6,9 +6,7 @@
 
 package org.apache.cxf.huge64.ws;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.util.logging.Logger;
 
 import javax.activation.DataHandler;
@@ -46,7 +44,7 @@ public class Huge64PortTypeImpl implements Huge64PortType {
         	ByteArrayOutputStream os = new ByteArrayOutputStream(size);
         	dataHandler.writeTo(os);
         	
-        	System.out.println(new String(os.toByteArray()));
+			// System.out.println(new String(os.toByteArray()));
         	
             UploadStatus _return = new UploadStatus();
             _return.setStatus("OK");
