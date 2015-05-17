@@ -7,7 +7,6 @@
 package org.apache.cxf.huge64.ws;
 
 import java.io.ByteArrayOutputStream;
-import java.util.logging.Logger;
 
 import javax.activation.DataHandler;
 
@@ -29,14 +28,10 @@ import org.apache.cxf.huge64.data.UploadStatus;
                       
 public class Huge64PortTypeImpl implements Huge64PortType {
 
-    private static final Logger LOG = Logger.getLogger(Huge64PortTypeImpl.class.getName());
-
     /* (non-Javadoc)
      * @see org.apache.cxf.huge64.ws.Huge64PortType#sendHugeFile(org.apache.cxf.huge64.data.HugeFile  sendHugeFileRequestPart )*
      */
     public org.apache.cxf.huge64.data.UploadStatus sendHugeFile(org.apache.cxf.huge64.data.HugeFile sendHugeFileRequestPart) { 
-        LOG.info("Executing operation sendHugeFile");
-        System.out.println(sendHugeFileRequestPart);
         try {
         	
         	DataHandler dataHandler = sendHugeFileRequestPart.getXml();
