@@ -100,7 +100,7 @@ public class Huge64Test {
 	}
 
 	@Test
-	public void testHugeFile() {
+	public void testHugeFile() throws Exception {
 		Huge64Service service = new Huge64Service(Huge64Service.WSDL_LOCATION, SERVICE_NAME);
 
 		Huge64PortType huge64Port = service.getHuge64Port();
@@ -109,9 +109,11 @@ public class Huge64Test {
 		client.getBus().setProperty("mtom-enabled", true);
 
 		HugeFile hugeFile = new HugeFile();
-		hugeFile.setFileName("gen_5M.xml");
+		
+		String fileName = "gen_5M.xml";
+		hugeFile.setFileName(fileName);
 
-		File file = getFile("gen_5M.xml");
+		File file = generateFile(fileName, 5_000_000);
 
 		DataSource ds = new FileDataSource(file);
 
