@@ -72,7 +72,7 @@ public class Huge64Test {
 		}
 	}
 
-	@Test
+	//@Test
 	public void testSimpleFile() {
 		Huge64Service service = new Huge64Service(Huge64Service.WSDL_LOCATION, SERVICE_NAME);
 
@@ -106,14 +106,18 @@ public class Huge64Test {
 
 		printTestMessage(numberOfPersonElements);
 
+		System.out.print("Initial ");
 		printMemory();
 
 		File generaredFile = generateFile(fileName, numberOfPersonElements);
 
 		File base64File = convertToBase64(generaredFile);
 
+		printFileSize(base64File);
+		
 		int responseCode = sendFile(base64File);
 
+		System.out.print("Final ");
 		printMemory();
 
 		assertThat(responseCode, is(200));
@@ -243,6 +247,12 @@ public class Huge64Test {
 	private void printMemory() {
 		Memory memory = getMemory();
 		System.out.println(memory);
+	}
+	
+	private void printFileSize(File file) {
+		if (file.exists()) {
+			System.out.println("File size: " + humanReadableByteCount(file.length()));
+		}
 	}
 
 	class Memory {

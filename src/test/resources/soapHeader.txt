@@ -2,4 +2,4 @@
 	<soap:Body>
 		<ns2:SendHugeFileRequest xmlns:ns2="http://www.example.org/huge64">
 			<fileName>file.xml</fileName>
-			<xml>
+			<xml><![CDATA[
