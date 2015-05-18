@@ -23,7 +23,7 @@
 	<logger name="org.springframework" level="WARN"/>
 	<logger name="org.springframework.context.annotation.ClassPathBeanDefinitionScanner" level="WARN"/>
 	<logger name="org.apache.cxf" level="WARN"/>
-	<logger name="org.apache.cxf.services" level="WARN"/>
+	<logger name="org.apache.cxf.services" level="INFO"/>
 	<logger name="org.apache.commons.digester" level="WARN"/>
 	<logger name="org.apache.commons.beanutils" level="WARN"/>
 

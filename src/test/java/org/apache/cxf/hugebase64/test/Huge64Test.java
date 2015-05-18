@@ -21,6 +21,8 @@ import javax.activation.FileDataSource;
 import javax.xml.namespace.QName;
 
 import org.apache.commons.codec.binary.Base64OutputStream;
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.helpers.IOUtils;
 import org.apache.cxf.huge64.data.HugeFile;
 import org.apache.cxf.huge64.data.UploadStatus;
@@ -78,10 +80,38 @@ public class Huge64Test {
 
 		Huge64PortType huge64Port = service.getHuge64Port();
 
+		Client client = ClientProxy.getClient(huge64Port);
+		client.getBus().setProperty("mtom-enabled", true);
+
 		HugeFile hugeFile = new HugeFile();
 		hugeFile.setFileName("file.xml");
 
 		File file = getFile("file.xml");
+
+		DataSource ds = new FileDataSource(file);
+
+		DataHandler dataHandler = new DataHandler(ds);
+		hugeFile.setXml(dataHandler);
+
+		UploadStatus uploadStatus = huge64Port.sendHugeFile(hugeFile);
+
+		assertThat(uploadStatus, is(notNullValue()));
+		assertThat(uploadStatus.getStatus(), is("OK"));
+	}
+
+	@Test
+	public void testHugeFile() {
+		Huge64Service service = new Huge64Service(Huge64Service.WSDL_LOCATION, SERVICE_NAME);
+
+		Huge64PortType huge64Port = service.getHuge64Port();
+
+		Client client = ClientProxy.getClient(huge64Port);
+		client.getBus().setProperty("mtom-enabled", true);
+
+		HugeFile hugeFile = new HugeFile();
+		hugeFile.setFileName("gen_5M.xml");
+
+		File file = getFile("gen_5M.xml");
 
 		DataSource ds = new FileDataSource(file);
 
@@ -152,7 +182,7 @@ public class Huge64Test {
 		if (!tmpDir.exists()) {
 			tmpDir.mkdirs();
 		}
-		File smallGenFile = new File(tmpDir, "gen_small.xml");
+		File smallGenFile = new File(tmpDir, fileName);
 		if (smallGenFile.exists()) {
 			smallGenFile.delete();
 		}
@@ -174,7 +204,7 @@ public class Huge64Test {
 	private File convertToBase64(File file) throws Exception {
 		InputStream in = new BufferedInputStream(new FileInputStream(file));
 
-		File base64File = new File(file.getParentFile(), "base64.txt");
+		File base64File = new File(file.getParentFile(), file.getName() + ".base64.txt");
 
 		OutputStream base64FileOutputStream = new BufferedOutputStream(new FileOutputStream(base64File));
 		Base64OutputStream base64OutputStream = new Base64OutputStream(base64FileOutputStream, true, -1, null);

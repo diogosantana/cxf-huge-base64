@@ -2,12 +2,13 @@
 <xsd:schema 
 	xmlns="http://www.example.org/huge64-types" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
 	targetNamespace="http://www.example.org/huge64-types">
 
     <xsd:complexType name="HugeFile">
     	<xsd:sequence>
     		<xsd:element name="fileName" type="xsd:string"></xsd:element>
-    		<xsd:element name="xml" type="xsd:base64Binary"></xsd:element>
+    		<xsd:element name="xml" type="xsd:base64Binary" xmime:expectedContentTypes="application/octet-stream"></xsd:element>
     	</xsd:sequence>
     </xsd:complexType>
 

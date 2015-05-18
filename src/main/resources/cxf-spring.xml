@@ -44,7 +44,8 @@
 		wsdlLocation="ws/huge64.wsdl"
 		>
 		<jaxws:properties>
-            <entry key="schema-validation-enabled" value="true" />
+            <!-- <entry key="schema-validation-enabled" value="true" /> -->
+            <entry key="mtom-enabled" value="true" />
         </jaxws:properties>
 		<jaxws:serviceBean>
 			<bean class="org.apache.cxf.huge64.ws.Huge64PortTypeImpl" />
