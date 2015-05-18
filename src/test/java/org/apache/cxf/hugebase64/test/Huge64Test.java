@@ -132,6 +132,7 @@ public class Huge64Test {
 		test("gen_100K.xml", 100_000);
 		test("gen_500K.xml", 500_000);
 		test("gen_1M.xml", 1_000_000);
+		test("gen_5M.xml", 5_000_000);
 	}
 
 	private void test(String fileName, int numberOfPersonElements) throws Exception {
